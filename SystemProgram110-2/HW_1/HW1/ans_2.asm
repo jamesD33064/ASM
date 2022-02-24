@@ -1,3 +1,7 @@
+        JSUB READ
+READ    LDX ZERO
+        
+
         LDX ZERO
 MOVECH  LDCH F1 , X
         
