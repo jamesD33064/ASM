@@ -1,6 +1,15 @@
-        JSUB READ
-READ    LDX ZERO
-        
+        JSUB    READ
+        JSUB    WRITE
+
+READ    LDX     ZERO
+RLOOP   TD      INDEV
+        JEQ     RLOOP
+        RD      INDEV
+        JSUB    CHANGE
+        STCH    DATA,X
+
+WRITE
+
 
         LDX ZERO
 MOVECH  LDCH F1 , X
