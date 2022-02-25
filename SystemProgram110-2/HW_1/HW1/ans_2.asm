@@ -10,18 +10,6 @@ RLOOP   TD      INDEV
 
 WRITE
 
-
-        LDX ZERO
-MOVECH  LDCH F1 , X
-        
-        COMP SZ
-        JGT CHANGE
-        STCH F2 , X
-        COMP COIN
-        JEQ NEXT
-        TIX 99
-        J MOVECH
-
 CHANGE  SUB T
         STCH F2 , X
         TIX 99
