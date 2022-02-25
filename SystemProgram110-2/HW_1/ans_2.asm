@@ -18,6 +18,12 @@ CHANGE  SUB T
 NEXT    LDX ZERO
 
 
+
+
+...   ---------------------
+...  //   M E M O R Y   //
+... ---------------------
+
 INDEV   BYTE    X'F1'
 OUTDEV  BYTE    X'F2'
 
