@@ -8,8 +8,10 @@ RLOOP   TD      INDEV
         JSUB    CHANGE
         STCH    DATA,X
 
-WRITE
-
+WRITE   LDX	ZERO
+WLOOP   WD	OUTDEV
+        JEQ     MLOOP
+        LDCH	DATA,X
 
         LDX ZERO
 MOVECH  LDCH F1 , X
