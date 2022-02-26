@@ -1,6 +1,7 @@
         JSUB    READ
         JSUB    WRITE
 
+... READ
 READ    LDX     ZERO
 RLOOP   TD      INDEV
         JEQ     RLOOP
@@ -8,14 +9,24 @@ RLOOP   TD      INDEV
         JSUB    CHANGE
         STCH    DATA,X
         TIX	COIN
-        JEQ	
-WRITE
+        JEQ	RLOOP
+        RSUB
+... WRITE
+WRITE   LDX	ZERO
+WLOOP   WD	OUTDEV
+        JEQ	WLOOP
+        LDCH	DATA,X
+        WD	OUTDEV
+        TIX	
 
+
+... CHANGE TO BIG
 CHANGE  SUB T
         STCH F2 , X
         TIX 99
         J MOVECH
-        
+
+... OUT
 NEXT    LDX ZERO
 
 
@@ -30,9 +41,8 @@ OUTDEV  BYTE    X'F2'
 
 
 DATA    RESB    100
+
 K100    WORD    100
-
-
 ZERO    WORD    0
 T       WORD    32
 SZ      WORD    91
