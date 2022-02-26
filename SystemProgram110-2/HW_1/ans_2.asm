@@ -8,7 +8,7 @@ RLOOP   TD      INDEV
         JEQ     RLOOP
         RD      INDEV   .讀一個 byte 到 A暫存
 .        JSUB    CHANGE
-        STCH    STR,X
+        STCH    STR , X
         
         TIX	COIN    .加一直到讀到＄
         JEQ	NEXT    .就跳走結束
@@ -20,10 +20,10 @@ RLOOP   TD      INDEV
 WRITE   LDX	ZERO
 WLOOP   TD	OUTDEV
         JEQ	WLOOP
-        LDCH	STR,X
+        LDCH	STR , X
         
-        COMP	SZ
-        JGT	CHANGE
+.        COMP	SZ
+.        JGT	CHANGE
 
         WD	OUTDEV
         TIX	COIN
@@ -32,11 +32,11 @@ WLOOP   TD	OUTDEV
         RSUB
 
 ... CHANGE TO BIG
-CHANGE  SUB     C
-        STCH    F2 , X
-        TIX     99
-        J       MOVECH
-        RSUB
+.CHANGE  SUB     C
+ .       STCH    F2 , X
+  .      TIX     99
+   .     J       MOVECH
+    .    RSUB
 
 ... OUT
 NEXT    LDX ZERO
