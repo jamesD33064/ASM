@@ -6,12 +6,12 @@ MOVECH  LDCH F1 , X
         STCH F2 , X
         COMP COIN
         JEQ NEXT
-        TIX 99
+        TIX NINE
         J MOVECH
 
 CHANGE  SUB T
         STCH F2 , X
-        TIX 99
+        TIX NINE
         J MOVECH
         
 NEXT    LDX ZERO
@@ -23,3 +23,4 @@ ZERO WORD 0
 T WORD 32
 SZ WORD 91
 COIN WORD 0x24
+NINE WORD 99
