@@ -32,11 +32,10 @@ WLOOP   TD	OUTDEV
         RSUB
 
 ... CHANGE TO BIG
-.CHANGE  SUB     C
- .       STCH    F2 , X
-  .      TIX     99
-   .     J       MOVECH
-    .    RSUB
+CHANGE  SUB     C
+        STCH    STR , X
+        TIX     NINE
+        RSUB
 
 ... OUT
 NEXT    LDX ZERO
@@ -56,3 +55,4 @@ ZERO    WORD    0
 C       WORD    32
 SZ      WORD    91
 COIN    WORD    0x24
+NINE    WORD    99
