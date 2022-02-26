@@ -7,7 +7,8 @@ RLOOP   TD      INDEV
         RD      INDEV
         JSUB    CHANGE
         STCH    DATA,X
-
+        TIX	COIN
+        JEQ	
 WRITE
 
 CHANGE  SUB T
@@ -27,7 +28,10 @@ NEXT    LDX ZERO
 INDEV   BYTE    X'F1'
 OUTDEV  BYTE    X'F2'
 
-DATA    RESB    1
+
+DATA    RESB    100
+K100    WORD    100
+
 
 ZERO    WORD    0
 T       WORD    32
