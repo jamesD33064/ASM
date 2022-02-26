@@ -18,12 +18,18 @@ RLOOP   TD      INDEV
 
 ... WRITE
 WRITE   LDX	ZERO
-WLOOP   WD	OUTDEV
+WLOOP   TD	OUTDEV
         JEQ	WLOOP
         LDCH	STR,X
-        WD	OUTDEV
-        TIX	
+        
+        COMP	SZ
+        JGT	CHANGE
 
+        WD	OUTDEV
+        TIX	COIN
+        JEQ	NEXT
+        J	WLOOP
+        RSUB
 
 ... CHANGE TO BIG
 CHANGE  SUB     C
@@ -34,9 +40,6 @@ CHANGE  SUB     C
 
 ... OUT
 NEXT    LDX ZERO
-
-
-
 
 ...   ---------------------
 ...  //   M E M O R Y   //
