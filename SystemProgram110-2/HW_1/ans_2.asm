@@ -12,7 +12,7 @@ R       RD      INDEV   .讀一個 byte 到 A暫存
         STCH    STR , X
         
         TIX	COIN    .加一直到讀到＄
-        JEQ	NEXT    .就跳走結束
+        JEQ	WRITE    .就跳走到write
 
         J	R
         RSUB
@@ -42,7 +42,7 @@ CHANGE  COMP	CHA
 JUMP    RSUB
 
 ... OUT
-NEXT    LDX ZERO
+NEXT    RSUB
 
 ...   ---------------------
 ...  //   M E M O R Y   //
@@ -55,10 +55,10 @@ OUTDEV  BYTE    X'F2'
 STR     RESB    100
 
 CHA     WORD    97
-CHZ     WORD    112
-K100    WORD    100
+CHZ     WORD    122
+
 ZERO    WORD    0
 C       WORD    32
 SZ      WORD    91
-COIN    WORD    0x24
+COIN    WORD    36
 NINE    WORD    99
