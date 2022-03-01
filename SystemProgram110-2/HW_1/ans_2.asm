@@ -8,28 +8,28 @@ RLOOP   TD      INDEV
         JEQ     RLOOP
 R       RD      INDEV   .讀一個 byte 到 A暫存
 
-        JSUB    CHANGE
+        STL	FUNC    .紀錄READ的位址
+        JSUB    CHANGE  .L位址變這行
+        LDL	FUNC    .將L的位址改回READ
         STCH    STR , X
         
         TIX	COIN    .加一直到讀到＄
-        JEQ	WRITE    .就跳走到write
+        COMP	COIN
+        JEQ     JUMP    .就跳走到RSUB
 
         J	R
-        RSUB
 
 ... WRITE
 WRITE   LDX	ZERO
 WLOOP   TD	OUTDEV
         JEQ	WLOOP
-        LDCH	STR , X
 
-W       WD	OUTDEV
+W       LDCH	STR , X
+        WD	OUTDEV
         TIX	NINE
-        LDCH	STR , X
         COMP	COIN
-        JEQ	NEXT
+        JEQ	JUMP
         J	W
-        RSUB
 
 ... CHANGE TO BIG
 CHANGE  COMP	CHA
@@ -39,10 +39,13 @@ CHANGE  COMP	CHA
 	JGT	JUMP
 
         SUB     C
+
+... RSUB
 JUMP    RSUB
 
 ... OUT
-NEXT    RSUB
+OVER    LDX	ZERO
+
 
 ...   ---------------------
 ...  //   M E M O R Y   //
@@ -53,6 +56,7 @@ OUTDEV  BYTE    X'F2'
 
 
 STR     RESB    100
+FUNC    RESW    1
 
 CHA     WORD    97
 CHZ     WORD    122
