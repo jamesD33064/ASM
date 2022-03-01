@@ -6,14 +6,14 @@
 READ    LDX     ZERO
 RLOOP   TD      INDEV
         JEQ     RLOOP
-        RD      INDEV   .讀一個 byte 到 A暫存
+R        RD      INDEV   .讀一個 byte 到 A暫存
 .        JSUB    CHANGE
         STCH    STR , X
         
         TIX	COIN    .加一直到讀到＄
         JEQ	NEXT    .就跳走結束
 
-        J	RLOOP
+        J	R
         RSUB
 
 ... WRITE
