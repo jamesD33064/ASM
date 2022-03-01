@@ -1,6 +1,11 @@
 ... MAIN
+
+.COPY    START   1000
+.FIRST   JSUB    READ
         JSUB    READ
         JSUB    WRITE
+        J	OVER
+.       END     FIRST     
 
 ... READ
 READ    LDX     ZERO
@@ -63,6 +68,5 @@ CHZ     WORD    122
 
 ZERO    WORD    0
 C       WORD    32
-SZ      WORD    91
 COIN    WORD    36
 NINE    WORD    99
