@@ -5,7 +5,7 @@
         JSUB    READ
         JSUB    WRITE
         J	OVER
-.       END     FIRST     
+.       END     FIRST
 
 ... READ
 READ    LDX     ZERO
