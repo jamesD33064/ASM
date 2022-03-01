@@ -22,9 +22,6 @@ WRITE   LDX	ZERO
 WLOOP   TD	OUTDEV
         JEQ	WLOOP
         LDCH	STR , X
-        
-.        COMP	SZ
-.        JGT	CHANGE
 
 W       WD	OUTDEV
         TIX	NINE
