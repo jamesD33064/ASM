@@ -11,29 +11,34 @@ WRITE   LDX	ZERO
 WLOOP   TD	OUTDEV
         JEQ	WLOOP
 
-W       LDCH	STR , X
+W	LDS	ONE	
+INTER	LDA	ONE   
+
+	MULR	S,A
+	
+	
         WD	OUTDEV
-        TIX	NINE
-        COMP	COIN
-        JEQ	JUMP
+
+	COMP	NINE
+        JEQ	INTER
+
         J	W
+
+... RSUB
+JUMP    RSUB
+
+... OUT
+OVER    LDX	ZERO
 
 
 ...   ---------------------
 ...  //   M E M O R Y   //
 ... ---------------------
 
-INDEV   BYTE    X'F1'
 OUTDEV  BYTE    X'F2'
 
 
-STR     RESB    100
-FUNC    RESW    1
 
-CHA     WORD    97
-CHZ     WORD    122
-
-ZERO    WORD    0
-C       WORD    32
-COIN    WORD    36
-NINE    WORD    99
+ZERO	WORD	0
+ONE	WORD	1
+NINE	WORD	9
