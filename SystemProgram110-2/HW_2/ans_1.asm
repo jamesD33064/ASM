@@ -11,27 +11,28 @@ WRITE   LDX	ZERO
 WLOOP   TD	OUTDEV
         JEQ	WLOOP
 
-	LDS	ZERO
-W       LDA     ONE	
-	ADDR    A,S
-	LDA	ZERO   
+CA      LDS	ZERO
+SET     LDX	ZERO    .初始化
+        LDA	ONE     .S為外層參數
+        ADDR	A,S     .將S加A (1)
 
-INTER   ADD	ONE
-        STA	PUTA
-	MULR	S,A
-        STA	RESULT
-	
-        WD	OUTDEV
-	LDA	PUTA
+IN      STA	PUTA    .Ａ為內層參數
 
-	COMP	NINE
-        JLT	INTER
-        JEQ	W
+        MULR	S,A       .相乘結果到Ａ
+        STA	RESULT  .結果放入RESULT
 
+        . STCH	STR,X
+        . LDCH	STR , X
+        . WD	OUTDEV
+        . TIX	NINE
 
+        LDA	PUTA    .將A還原
+        ADD	ONE     .A加一
 
-
-        J	W
+        . TIX	NINE
+        COMP	TEN
+        JLT	IN
+        J	SET
 
 ... RSUB
 JUMP    RSUB
@@ -46,11 +47,14 @@ OVER    LDX	ZERO
 
 OUTDEV  BYTE    X'F2'
 
-STR	RESW	3
+STR	RESW	500
 PUTA    RESW    2
+PUTS    RESW    2
 RESULT  RESW    2
 
 
 ZERO	WORD	0
 ONE	WORD	1
 NINE	WORD	9
+TEN     WORD    10
+
