@@ -19,17 +19,22 @@ SET     LDX	ZERO    .初始化
 IN      STA	PUTA    .Ａ為內層參數
 
         MULR	S,A       .相乘結果到Ａ
-        STA	RESULT  .結果放入RESULT
+        . STA	RESULT  .結果放入RESULT
 
-        LDCH	RESULT , X
-        WD	OUTDEV
+
 
         LDA	PUTA    .將A還原
         ADD	ONE     .A加一
 
-        TIX	NINE
+        COMP    TEN
         JLT	IN
         J	SET
+
+
+... PRINT
+PRINT   WD	OUTDEV
+
+
 
 ... RSUB
 JUMP    RSUB
