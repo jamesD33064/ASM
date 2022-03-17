@@ -11,16 +11,25 @@ WRITE   LDX	ZERO
 WLOOP   TD	OUTDEV
         JEQ	WLOOP
 
-W	LDS	ONE	
-INTER	LDA	ONE   
+	LDS	ZERO
+W       LDA     ONE	
+	ADDR    A,S
+	LDA	ZERO   
 
+INTER   ADD	ONE
+        STA	PUTA
 	MULR	S,A
-	
+        STA	RESULT
 	
         WD	OUTDEV
+	LDA	PUTA
 
 	COMP	NINE
-        JEQ	INTER
+        JLT	INTER
+        JEQ	W
+
+
+
 
         J	W
 
@@ -38,6 +47,9 @@ OVER    LDX	ZERO
 OUTDEV  BYTE    X'F2'
 
 STR	RESW	3
+PUTA    RESW    2
+RESULT  RESW    2
+
 
 ZERO	WORD	0
 ONE	WORD	1
