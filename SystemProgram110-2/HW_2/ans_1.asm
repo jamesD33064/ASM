@@ -95,9 +95,9 @@ PS      STA	PUTA_1
         WD	OUTDEV
         LDA	PUTA_1
         RSUB
-        
+
 ...OUT
-OUT     LDX	#0
+OUT     J       OUT
 
 ...   ---------------------
 ...  //   M E M O R Y   //
