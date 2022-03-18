@@ -6,7 +6,7 @@
         J	OVER
 .       END     FIRST
 
-... WRITE
+... WRITE 
 WRITE   LDX	ZERO
 WLOOP   TD	OUTDEV
         JEQ	WLOOP
