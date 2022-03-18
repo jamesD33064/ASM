@@ -1,18 +1,3 @@
-... MAIN
-
-.COPY    START   1000
-.FIRST   JSUB    READ
-        JSUB    WRITE
-        J	OVER
-.       END     FIRST
-
-... WRITE 
-WRITE   LDX	ZERO
-WLOOP   TD	OUTDEV
-        JEQ	WLOOP
-
-
-
 CAC     LDS	ZERO
 
 SET     LDX	ZERO    .初始化

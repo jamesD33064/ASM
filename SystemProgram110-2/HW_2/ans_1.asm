@@ -37,11 +37,11 @@ PRINT   DIV	TEN
         JGT	BIG
         J       SMALL
 
-SMALL   ADD	FE
+SMALL   ADD	#48
         WD	OUTDEV
         J       BACK
 
-BIG     ADD	FE
+BIG     ADD	#48
         WD	OUTDEV
         J       BACK
 
