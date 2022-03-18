@@ -1,11 +1,5 @@
 ... MAIN
 
-.COPY    START   1000
-.FIRST   JSUB    READ
-        JSUB    WRITE
-        J	OVER
-.       END     FIRST
-
 ... WRITE 
 WRITE   LDX	ZERO
 WLOOP   TD	OUTDEV
@@ -32,31 +26,39 @@ BACK
 
 
 ... PRINT
-PRINT   DIV	TEN
-        COMP    ZERO	
-        JGT	BIG
-        J       SMALL
+PRINT   RMO	A,B
+        DIV	#10
+        COMP	#0
+        JGT     TWO	
+        J       ONENUM
 
-SMALL   ADD	#48
+ONENUM  JSUB	PS
+        RMO	B, A
+        ADD	#48
         WD	OUTDEV
         J       BACK
 
-BIG     ADD	#48
+TWO     ADD	#48
         WD	OUTDEV
+        SUB	#48
+        MUL     #10
+        SUBR    A,B
+        RMO	B,A
+        ADD	#48
+        WD	OUTDEV        	
         J       BACK
 
 ...PRINT NEWLINE
-PNL     STA     PUTA
-        LDCH	NL
+PNL     LDA	NL
         WD	OUTDEV
-        LDA     PUTA
         J	SET
 
-... RSUB
-JUMP    RSUB
-
-... OUT
-OVER    LDX	ZERO
+...PRINT SPACE
+PS      STA	PUTA_1
+        LDA	SPACE
+        WD	OUTDEV
+        LDA	PUTA_1
+        RSUB
 
 
 ...   ---------------------
@@ -66,6 +68,7 @@ OVER    LDX	ZERO
 OUTDEV  BYTE    X'F2'
 
 PUTA    RESW    2
+PUTA_1  RESW    2
 PUTS    RESW    2
 RESULT  RESW    2
 

@@ -6,26 +6,34 @@ WRITE   LDX	#0
 WLOOP   TD	OUTDEV
         JEQ	WLOOP
 
-	LDA	#10
+	LDA	#8
+        RMO	A,B
         DIV	#10
         COMP	#0
         JGT     TWO	
         J       ONE
 
-ONE     ADD	#48
+ONE     LDA	SPACE
         WD	OUTDEV
-
+        RMO	B, A
+        ADD	#48
+        WD	OUTDEV
         RSUB
 
 TWO     ADD	#48
         WD	OUTDEV
-
-
+        SUB	#48
+        MUL     #10
+        SUBR    A,B
+        RMO	B,A
+        ADD	#48
+        WD	OUTDEV        	
         RSUB
 
 
 ... RSUB
 JUMP    RSUB
+... OUT
 OUT     LDX	#0
 
 ...   ---------------------
@@ -33,4 +41,4 @@ OUT     LDX	#0
 ... ---------------------
 
 OUTDEV  BYTE    X'F2'
-STR     RESB    100
+SPACE   WORD    32
