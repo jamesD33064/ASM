@@ -1,43 +1,36 @@
-... MAIN
-
-.COPY    START   1000
         JSUB    WRITE
-        J	OVER
-.       END     FIRST
+        J	OUT
 
 ... WRITE
-WRITE   LDX	ZERO
+WRITE   LDX	#0
 WLOOP   TD	OUTDEV
         JEQ	WLOOP
-	LDA	#12
-	STA	STR
 
-W       LDCH	STR
+	LDA	#10
+        DIV	#10
+        COMP	#0
+        JGT     TWO	
+        J       ONE
+
+ONE     ADD	#48
         WD	OUTDEV
-        TIX	NINE
-        COMP	COIN
-        JEQ	JUMP
+
         RSUB
+
+TWO     ADD	#48
+        WD	OUTDEV
+
+
+        RSUB
+
+
 ... RSUB
 JUMP    RSUB
-
-... OUT
-OVER    LDX	ZERO
-
+OUT     LDX	#0
 
 ...   ---------------------
 ...  //   M E M O R Y   //
 ... ---------------------
 
 OUTDEV  BYTE    X'F2'
-
 STR     RESB    100
-FUNC    RESW    1
-
-CHA     WORD    97
-CHZ     WORD    122
-
-ZERO    WORD    0
-C       WORD    32
-COIN    WORD    36
-NINE    WORD    99
