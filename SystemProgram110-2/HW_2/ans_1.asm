@@ -1,26 +1,26 @@
 ... MAIN
 
 ... WRITE 
-WRITE   LDX	ZERO
+WRITE   LDX	#0
 WLOOP   TD	OUTDEV
         JEQ	WLOOP
 
-CAC     LDS	ZERO
-SET     LDX	ZERO    .初始化
-        LDA	ONE     .S為外層參數
+CAC     LDS	#0
+SET     LDX	#0      .初始化
+        LDA	#1      .S為外層參數
         ADDR	A,S     .將S加A (1)
 
 IN      STA	PUTA    .Ａ為內層參數
 
-        MULR	S,A       .相乘結果到Ａ
+        MULR	S,A     .相乘結果到Ａ
         STA	RESULT  .結果放入RESULT
 
         J	PRINT   .把Ａ的東西印出來 
 BACK    
         LDA	PUTA    .將A還原
-        ADD	ONE     .A加一
+        ADD	#1     .A加一
 
-        COMP    TEN
+        COMP    #10
         JLT	IN
         J	PNL
 
@@ -30,15 +30,17 @@ PRINT   RMO	A,B
         DIV	#10
         COMP	#0
         JGT     TWO	
-        J       ONENUM
+        J       ONE
 
-ONENUM  JSUB	PS
+ONE     JSUB	PS
+        JSUB	PS
         RMO	B, A
         ADD	#48
         WD	OUTDEV
         J       BACK
 
-TWO     ADD	#48
+TWO     JSUB	PS
+        ADD	#48
         WD	OUTDEV
         SUB	#48
         MUL     #10
@@ -72,8 +74,6 @@ PUTA_1  RESW    2
 PUTS    RESW    2
 RESULT  RESW    2
 
-ZERO	WORD	0
-ONE	WORD	1
 NINE	WORD	9
 TEN     WORD    10
 FE      WORD    48
