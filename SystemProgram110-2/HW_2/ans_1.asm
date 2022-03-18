@@ -19,9 +19,10 @@ SET     LDX	ZERO    .初始化
 IN      STA	PUTA    .Ａ為內層參數
 
         MULR	S,A       .相乘結果到Ａ
-        . STA	RESULT  .結果放入RESULT
+        STA	RESULT  .結果放入RESULT
 
-
+        J	PRINT   .把Ａ的東西印出來 
+BACK    
 
         LDA	PUTA    .將A還原
         ADD	ONE     .A加一
@@ -32,8 +33,18 @@ IN      STA	PUTA    .Ａ為內層參數
 
 
 ... PRINT
-PRINT   WD	OUTDEV
+PRINT   DIV	TEN
+        JLT	SMALL
+        J       BIG
+SMALL   ADD	FE
+        WD	OUTDEV
 
+BIG     ADD	FE
+        WD	OUTDEV
+
+
+
+        J       BACK
 
 
 ... RSUB
@@ -52,7 +63,6 @@ OUTDEV  BYTE    X'F2'
 PUTA    RESW    2
 PUTS    RESW    2
 RESULT  RESW    2
-
 
 ZERO	WORD	0
 ONE	WORD	1
