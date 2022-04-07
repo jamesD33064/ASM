@@ -21,12 +21,12 @@ int	ASM_token(char *buf);			/* Get a token from the file */
 
 /* Private variable and functions */
 FILE		*ASM_fp;
-int		ASM_buf;
-int		ASM_flag = FALSE;
+int			ASM_buf;
+int			ASM_flag = FALSE;
 char		DELIMITER[] = " ,\t\r\n";
-int		LEN_DELIMITER = sizeof(DELIMITER)-1;	/* subtract the last character '\0' */
+int			LEN_DELIMITER = sizeof(DELIMITER)-1;	/* subtract the last character '\0' */
 char		SPECIAL[] = "#@+*,.";					/* , in DELIMINTER and SPECIAL */
-int		LEN_SPECIAL = sizeof(SPECIAL)-1;		/* subtract the last character '\0' */
+int			LEN_SPECIAL = sizeof(SPECIAL)-1;		/* subtract the last character '\0' */
 
 FILE	 *ASM_open(char *fname)
 {
@@ -129,8 +129,8 @@ int ASM_token(char *buf)
 
 int main(int argc, char *argv[])
 {
-	int			i, c;
-	char			buf[LEN_SYMBOL];
+	int		i, c;
+	char	buf[LEN_SYMBOL];
 
 	if(argc < 2)
 	{
