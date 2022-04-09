@@ -253,6 +253,7 @@ int main(int argc, char *argv[])
 	LINE		line;
     SYMBOL_TABLE symbol_table[200];
     int symbol_flag=0;
+    int start_address;
 
 	if(argc < 2)
 	{
@@ -271,6 +272,7 @@ int main(int argc, char *argv[])
 				else if(c == LINE_COMMENT)
 					printf("%03d : Comment line\n", line_count);
 				else{
+
                     if (line.addressing == ADDR_IMMEDIATE) {
                         int len = strlen(line.operand1) + 2;
                         char concated[len];
@@ -295,7 +297,8 @@ int main(int argc, char *argv[])
                         strcat(concated, line.op);
                         strcpy(line.op, concated);
                     }
-                    printf("%08X %12s %12s %12s %12s\n",lct, line.symbol, line.op, line.operand1, line.operand2);
+
+                    printf("%08X %12s %12s %12s\n",lct, line.symbol, line.op, line.operand1);
                 }
 					
 
