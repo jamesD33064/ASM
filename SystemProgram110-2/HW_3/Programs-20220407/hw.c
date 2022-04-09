@@ -246,7 +246,6 @@ int main(int argc, char *argv[])
 	int			i, c, line_count;
 	char		buf[LEN_SYMBOL];
 	LINE		line;
-
 	if(argc < 2)
 	{
 		printf("Usage: %s fname.asm\n", argv[0]);
@@ -264,7 +263,7 @@ int main(int argc, char *argv[])
 				else if(c == LINE_COMMENT)
 					printf("%03d : Comment line\n", line_count);
 				else
-					printf("%X \t %03d : %12s %12s %12s,%12s (FMT=%X, ADDR=%X)\n",lct, line_count, line.symbol, line.op, line.operand1, line.operand2, line.fmt, line.addressing);
+					printf("%08X \t %03d : %12s %12s %12s,%12s (FMT=%X, ADDR=%X)\n",lct, line_count, line.symbol, line.op, line.operand1, line.operand2, line.fmt, line.addressing);
 
 					if(line.fmt==4){
 						lct+=3;
@@ -281,6 +280,9 @@ int main(int argc, char *argv[])
                             lct+=strlen(p);
 
 
+                    }
+                    else if (!strcmp(line.op,"WORD")){
+                        lct+=3;
                     }
                     else if (!strcmp(line.op,"RESW")){
                         lct+=3;
