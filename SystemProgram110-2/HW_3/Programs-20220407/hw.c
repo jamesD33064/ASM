@@ -32,6 +32,7 @@ typedef struct
 	unsigned	addressing;	
 } LINE;
 
+int lct=0;
 int process_line(LINE *line);
 /* return LINE_EOF, LINE_COMMENT, LINE_ERROR, LINE_CORRECT and Instruction information in *line*/
 
@@ -263,8 +264,31 @@ int main(int argc, char *argv[])
 				else if(c == LINE_COMMENT)
 					printf("%03d : Comment line\n", line_count);
 				else
-					printf("%03d : %12s %12s %12s,%12s (FMT=%X, ADDR=%X)\n", line_count, line.symbol, line.op, line.operand1, line.operand2, line.fmt, line.addressing);
-			}
+					printf("%X \t %03d : %12s %12s %12s,%12s (FMT=%X, ADDR=%X)\n",lct, line_count, line.symbol, line.op, line.operand1, line.operand2, line.fmt, line.addressing);
+
+					if(line.fmt==4){
+						lct+=3;
+					}
+                    else if (line.fmt==8){
+                        lct+=4;
+                    }
+                    else if (!strcmp(line.op,"BYTE")){
+                            const char* d = "'";
+                            char *p;
+                            p = strtok(line.operand1, d);
+                            p = strtok(NULL, d);
+                            // printf("%d\n", strlen(p));
+                            lct+=strlen(p);
+
+
+                    }
+                    else if (!strcmp(line.op,"RESW")){
+                        lct+=3;
+                    }
+                    else if (!strcmp(line.op,"RESB")){
+                        lct+=1;
+                    }
+            }
 			ASM_close();
 		}
 	}

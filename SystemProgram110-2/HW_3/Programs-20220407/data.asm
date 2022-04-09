@@ -30,8 +30,8 @@ ENDFIL  LDA     EOF
 
         J       @RETARD
 
-EOF       BYTE     C'EOF'
+EOF     BYTE    C'EOF'
 RETARD  RESW    1
 LENGTH  RESW    1
-BUFFER  RESB      4096
+BUFFER  RESB    4096
 
