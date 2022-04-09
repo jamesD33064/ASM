@@ -271,7 +271,7 @@ int main(int argc, char *argv[])
 				else if(c == LINE_COMMENT)
 					printf("%03d : Comment line\n", line_count);
 				else
-					printf("%08X \t %03d : %12s %12s %12s,%12s (FMT=%X, ADDR=%X)\n",lct, line_count, line.symbol, line.op, line.operand1, line.operand2, line.fmt, line.addressing);
+					printf("%08X %12s %12s %12s %12s\n",lct, line.symbol, line.op, line.operand1, line.operand2);
 
 
                 if(strcmp(line.symbol,"")){
