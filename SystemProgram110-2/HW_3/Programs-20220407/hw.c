@@ -270,10 +270,36 @@ int main(int argc, char *argv[])
 					printf("%03d : Error\n", line_count);
 				else if(c == LINE_COMMENT)
 					printf("%03d : Comment line\n", line_count);
-				else
-					printf("%08X %12s %12s %12s %12s\n",lct, line.symbol, line.op, line.operand1, line.operand2);
+				else{
+                    if (line.addressing == ADDR_IMMEDIATE) {
+                        int len = strlen(line.operand1) + 2;
+                        char concated[len];
+                        memset(concated, '\0', len);
+                        strcat(concated, "#");
+                        strcat(concated, line.operand1);
+                        strcpy(line.operand1, concated);
+                    }
+                    if (line.addressing == ADDR_INDIRECT) {
+                        int len = strlen(line.operand1) + 2;
+                        char concated[len];
+                        memset(concated, '\0', len);
+                        strcat(concated, "@");
+                        strcat(concated, line.operand1);
+                        strcpy(line.operand1, concated);
+                    }
+                    if (line.fmt == FMT4) {
+                        int len = strlen(line.op) + 2;
+                        char concated[len];
+                        memset(concated, '\0', len);
+                        strcat(concated, "+");
+                        strcat(concated, line.op);
+                        strcpy(line.op, concated);
+                    }
+                    printf("%08X %12s %12s %12s %12s\n",lct, line.symbol, line.op, line.operand1, line.operand2);
+                }
+					
 
-
+                
                 if(strcmp(line.symbol,"")){
                     // printf("%s\n",line.symbol);
                     if(strcmp(line.op,"START")){
