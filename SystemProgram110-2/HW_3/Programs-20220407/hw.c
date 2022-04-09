@@ -301,8 +301,6 @@ int main(int argc, char *argv[])
                     printf("%08X %12s %12s %12s\n",lct, line.symbol, line.op, line.operand1);
                 }
 					
-
-                
                 if(strcmp(line.symbol,"")){
                     // printf("%s\n",line.symbol);
                     if(strcmp(line.op,"START")){
@@ -311,6 +309,7 @@ int main(int argc, char *argv[])
                         symbol_flag++;
                     }
                 }
+
                 if (line.fmt==FMT0){
                     lct+=0;
                 }
@@ -344,8 +343,6 @@ int main(int argc, char *argv[])
                 else if (!strcmp(line.op,"RESB")){
                     lct+=1;
                 }
-
-
 
             }
 			for(int i=0 ; i<symbol_flag ; i++){
