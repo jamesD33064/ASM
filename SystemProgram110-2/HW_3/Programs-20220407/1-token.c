@@ -8,8 +8,8 @@
 #include <string.h>
 
 #define	LEN_SYMBOL	(20)
-#define	TRUE			(1)
-#define	FALSE			(0)
+#define	TRUE		(1)
+#define	FALSE		(0)
 
 /* Public variables and functions */
 FILE *ASM_open(char *fname);		/* Open a SIC/XE asm file */
@@ -28,7 +28,7 @@ int			LEN_DELIMITER = sizeof(DELIMITER)-1;	/* subtract the last character '\0' *
 char		SPECIAL[] = "#@+*,.";					/* , in DELIMINTER and SPECIAL */
 int			LEN_SPECIAL = sizeof(SPECIAL)-1;		/* subtract the last character '\0' */
 
-FILE	 *ASM_open(char *fname)
+FILE *ASM_open(char *fname)
 {
 	ASM_fp = fopen(fname, "r");
 	return (ASM_fp); 
