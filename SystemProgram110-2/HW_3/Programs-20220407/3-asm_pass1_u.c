@@ -88,7 +88,7 @@ int process_line(LINE *line)
 						line->fmt = FMT4;
 						state = 2;
 					}
-					else	if(op != NULL)	/* INSTRUCTION */
+					else if(op != NULL)	/* INSTRUCTION */
 					{
 						strcpy(line->op, op->op);
 						line->code = op->code;
