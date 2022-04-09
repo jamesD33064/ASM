@@ -32,6 +32,11 @@ typedef struct
 	unsigned	addressing;	
 } LINE;
 
+typedef struct {
+  char symbol[LEN_SYMBOL];
+  int loc;
+} SYMBOL_TABLE;
+
 int lct=0;
 int process_line(LINE *line);
 /* return LINE_EOF, LINE_COMMENT, LINE_ERROR, LINE_CORRECT and Instruction information in *line*/
@@ -246,6 +251,9 @@ int main(int argc, char *argv[])
 	int			i, c, line_count;
 	char		buf[LEN_SYMBOL];
 	LINE		line;
+    SYMBOL_TABLE symbol_table[200];
+    int symbol_flag=0;
+
 	if(argc < 2)
 	{
 		printf("Usage: %s fname.asm\n", argv[0]);
@@ -265,33 +273,56 @@ int main(int argc, char *argv[])
 				else
 					printf("%08X \t %03d : %12s %12s %12s,%12s (FMT=%X, ADDR=%X)\n",lct, line_count, line.symbol, line.op, line.operand1, line.operand2, line.fmt, line.addressing);
 
-					if(line.fmt==4){
-						lct+=3;
-					}
-                    else if (line.fmt==8){
-                        lct+=4;
+
+                if(strcmp(line.symbol,"")){
+                    // printf("%s\n",line.symbol);
+                    if(strcmp(line.op,"START")){
+                        strcpy(symbol_table[symbol_flag].symbol,line.symbol);
+                        symbol_table[symbol_flag].loc = lct;
+                        symbol_flag++;
                     }
-                    else if (!strcmp(line.op,"BYTE")){
-                            const char* d = "'";
-                            char *p;
-                            p = strtok(line.operand1, d);
-                            p = strtok(NULL, d);
-                            // printf("%d\n", strlen(p));
-                            lct+=strlen(p);
+                }
+                if (line.fmt==FMT0){
+                    lct+=0;
+                }
+                else if (line.fmt==FMT1){
+                    lct+=1;
+                }
+                else if (line.fmt==FMT2){
+                    lct+=2;
+                }
+                else if(line.fmt==FMT3){
+                    lct+=3;
+                }
+                else if (line.fmt==FMT4){
+                    lct+=4;
+                }
+                
+                if (!strcmp(line.op,"BYTE")){
+                        const char* d = "'";
+                        char *p;
+                        p = strtok(line.operand1, d);
+                        p = strtok(NULL, d);
+                        // printf("%d\n", strlen(p));
+                        lct+=strlen(p);
+                }
+                else if (!strcmp(line.op,"WORD")){
+                    lct+=3;
+                }
+                else if (!strcmp(line.op,"RESW")){
+                    lct+=3;
+                }
+                else if (!strcmp(line.op,"RESB")){
+                    lct+=1;
+                }
 
 
-                    }
-                    else if (!strcmp(line.op,"WORD")){
-                        lct+=3;
-                    }
-                    else if (!strcmp(line.op,"RESW")){
-                        lct+=3;
-                    }
-                    else if (!strcmp(line.op,"RESB")){
-                        lct+=1;
-                    }
+
             }
-			ASM_close();
+			for(int i=0 ; i<symbol_flag ; i++){
+                printf("%s\t: %08x\n",symbol_table[i].symbol,symbol_table[i].loc);
+            }
+            ASM_close();
 		}
 	}
 }
