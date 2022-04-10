@@ -8,6 +8,7 @@
 /*  2021.03.26 Process error: format 1 & 2 instruction use + 		   */
 /***********************************************************************/
 #include <string.h>
+#include <stdlib.h>
 #include "2-optable.c"
 
 /* Public variables and functions */
@@ -253,7 +254,7 @@ int main(int argc, char *argv[])
 	LINE		line;
     SYMBOL_TABLE symbol_table[200];
     int symbol_flag=0;
-    int start_address;
+    int start_address=0;
 
 	if(argc < 2)
 	{
@@ -308,6 +309,9 @@ int main(int argc, char *argv[])
                         symbol_table[symbol_flag].loc = lct;
                         symbol_flag++;
                     }
+                    else if(!strcmp(line.op,"START")){
+						start_address = atoi(line.operand1);
+                    }
                 }
 
                 if (line.fmt==FMT0){
@@ -341,10 +345,14 @@ int main(int argc, char *argv[])
                     lct+=3;
                 }
                 else if (!strcmp(line.op,"RESB")){
-                    lct+=1;
-                }
+                   lct+=atoi(line.operand1);
+				//    printf("%x",lct);
 
+                }
             }
+
+			printf(".\n.\nprogram length : %08x\n\n",lct-start_address);
+
 			for(int i=0 ; i<symbol_flag ; i++){
                 printf("%s\t: %08x\n",symbol_table[i].symbol,symbol_table[i].loc);
             }
