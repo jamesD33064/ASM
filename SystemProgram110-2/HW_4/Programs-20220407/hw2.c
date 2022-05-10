@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "hw.c"
+#include "pass1.c"
 
 #define max 0xFFFFFFFF
 
