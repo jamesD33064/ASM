@@ -12,8 +12,8 @@ int main(int argc, char* argv[]) {
     FILE* file[10];
     test list[100];
     int count=0;
-    int start = 4096;
-    for(int i=1;i<argc;i++){
+    int start = (int)strtol(argv[1], NULL, 16);
+    for(int i=2;i<argc;i++){
         file[i]=fopen(argv[i], "r");
         char buf[128];
         char first;
