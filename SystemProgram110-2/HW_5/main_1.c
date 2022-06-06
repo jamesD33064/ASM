@@ -27,23 +27,23 @@ int main(int argc, char* argv[]) {
         }
         while(!feof(file[i])&&fscanf(file[i],"%c",&first)!=0){
             switch(first){
-            case 'H':
-                fscanf(file[i],"%06s%06x%06x",list[count].CS,&s,&list[count].len);
-                printf("%-06s\t%s\t%06x\n",list[count].CS,"\t",list[count].len);
-                size=list[count].len;
-                count++;
-            case 'D':
-                fscanf(file[i],"%06s%06x",list[count].SN,&list[count].ADR);
-                list[count].ADR+=start;
-                p = strtok(list[count].SN, "D");
-                printf("\t%s\t%06x\n",p,list[count].ADR);
-                count++;
-                fscanf(file[i],"%06s%06x",list[count].SN,&list[count].ADR);
-                list[count].ADR+=start;
-                printf("\t%-06s\t%06x\n",list[count].SN,list[count].ADR);
-                count++;
-                
-            default:;
+                case 'H':
+                    fscanf(file[i],"%06s%06x%06x",list[count].CS,&s,&list[count].len);
+                    printf("%-06s\t%s\t%06x\n",list[count].CS,"\t",list[count].len);
+                    size=list[count].len;
+                    count++;
+                case 'D':
+                    fscanf(file[i],"%06s%06x",list[count].SN,&list[count].ADR);
+                    list[count].ADR+=start;
+                    p = strtok(list[count].SN, "D");
+                    printf("\t%s\t%06x\n",p,list[count].ADR);
+                    count++;
+                    fscanf(file[i],"%06s%06x",list[count].SN,&list[count].ADR);
+                    list[count].ADR+=start;
+                    printf("\t%-06s\t%06x\n",list[count].SN,list[count].ADR);
+                    count++;
+                    
+                default:;
             }
         }
         
